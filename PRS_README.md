@@ -59,6 +59,13 @@ Bobby Witt Jr.     0.2131  0.375  0.0361        0.97           3.0
 Juan Soto          0.2094  0.394  0.0530        0.94           0.8
 Aaron Judge        0.2060  0.432  0.0791        0.82           2.6
 ```
+## Dashboard
+
+### PRS Rankings — Top 10 Players
+![PRS Rankings Dashboard](PRS_Rankings_Dashboard.png)
+
+### PRS vs WAR Correlation
+![PRS vs WAR Scatter](PRS_vs_WAR_Scatter.png)
 
 ## What's Next
 
