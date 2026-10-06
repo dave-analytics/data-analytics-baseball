@@ -10,8 +10,8 @@ Public sports analytics portfolio: PRS (write-up and charts only, code not in re
 
 ## Next step
 
-Push the PRS source script to `prs/` so its validation can be redone out-of-sample (tune weights on 2024, test against 2025 WAR / next-season WAR instead of same-season WAR).
+PRS stays private (not in this repo). Reviewed the private script; next is an out-of-sample backtest (build PRS from 2022–24 → test vs 2025 WAR, 2023–25 → 2026 WAR), once Dave uploads WAR_2024/2025/2026 CSVs. Merge PR #1 (infield report) in the meantime.
 
 ## Blockers
 
-PRS review is blocked until the PRS source code is added to the repo.
+PRS backtest waiting on Dave's Baseball Reference WAR CSVs (2024–2026).
