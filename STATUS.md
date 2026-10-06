@@ -2,15 +2,15 @@
 
 ## Current state
 
-Public sports analytics portfolio: PRS (Player Reliability Score — write-up and charts only, code not in repo), Infield Weekly Report, Yahoo Fantasy pitcher tracker, and learning files. The infield report was just rewritten for accuracy; it passes a mocked end-to-end test but has not yet been run against the live MLB Stats API.
+Public sports analytics portfolio: PRS (write-up and charts only, code not in repo), Infield Weekly Report, Yahoo Fantasy pitcher tracker, and learning files. The infield report's accuracy overhaul is done and verified against the live MLB Stats API (May 4–10, 2026 output committed); the cloud environment now allows statsapi.mlb.com.
 
 ## Last change
 
-2026-10-06 — Infield report accuracy overhaul: z-scored weights (OBP/HR/starts now actually 50/30/20), regression to the mean, PA-weighted recent form (max 25%), active-roster filter drops IL players, paginated stats pulls, postponed games skipped, team-ID merge, traded-player handling, no future-data leakage for past weeks, `--start`/`--out-dir` CLI args instead of hardcoded dates and Desktop paths.
+2026-10-06 — Infield report overhaul: z-scored weights (OBP/HR/starts now truly 50/30/20), regression to the mean, PA-weighted recent form, active-roster (IL) filter, paginated pulls, postponed games skipped, positions from games actually fielded in the period (min 5 games), no future-data leakage, `--start`/`--out-dir` CLI. Re-ran May 4–10 live and replaced the old CSV/PNG.
 
 ## Next step
 
-Dave: run `python infield-report/infield_report.py --start 2026-05-04` locally (the MLB API is blocked from the cloud sandbox), sanity-check the rankings against the old May 4–10 CSV, then commit the new output. After that, push the PRS script so its validation can be redone out-of-sample (tune on 2024, test on 2025 WAR).
+Push the PRS source script to `prs/` so its validation can be redone out-of-sample (tune weights on 2024, test against 2025 WAR / next-season WAR instead of same-season WAR).
 
 ## Blockers
 

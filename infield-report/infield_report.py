@@ -28,6 +28,7 @@ INFIELD_POSITIONS = ['C', '1B', '2B', '3B', 'SS']
 WEIGHTS = {'obp': 0.50, 'hr_rate': 0.30, 'starts': 0.20}
 
 MIN_PA = 50                # minimum season plate appearances to be ranked
+MIN_POSITION_GAMES = 5     # games at a position to count there (Yahoo uses 5 starts / 10 games)
 
 # Regression to the mean: each stat is pulled toward the league average by
 # this many "phantom" PA of league-average performance. These are the PA at
@@ -120,6 +121,43 @@ def stats_by_player(splits):
     return players
 
 
+def fielded_positions(player_ids, start, end, season):
+    """Each player's main fielding position over a date range.
+
+    The stats endpoints report a player's position as of today, so rerunning
+    an old week can mislabel players who have since moved (e.g. a 1B who is
+    now a DH). Instead, count games played at each position in the window and
+    take the most-played one, ignoring DH. Players with fewer than
+    MIN_POSITION_GAMES games at any fielding spot count as DH.
+    """
+    hydrate = (f"stats(group=[fielding],type=[byDateRange],startDate={start.isoformat()},"
+               f"endDate={end.isoformat()},season={season},gameType=R)")
+    ids = list(player_ids)
+    positions = {}
+    for i in range(0, len(ids), 50):
+        batch = ids[i:i + 50]
+        data = get_json(f"{API}/people", {'personIds': ','.join(map(str, batch)), 'hydrate': hydrate})
+        for person in data.get('people', []):
+            # The API repeats some splits, so key on (position, team) before adding
+            games = {}
+            for block in person.get('stats', []):
+                for split in block.get('splits', []):
+                    pos = split['stat'].get('position', {}).get('abbreviation', '')
+                    team = split.get('team', {}).get('id')
+                    if pos and pos != 'DH':
+                        games[(pos, team)] = int(split['stat'].get('gamesPlayed', 0) or 0)
+            by_pos = {}
+            for (pos, _), g in games.items():
+                by_pos[pos] = by_pos.get(pos, 0) + g
+            if by_pos:
+                pos = max(by_pos, key=by_pos.get)
+                # Mostly-DH players with a handful of games in the field stay DH
+                positions[person['id']] = pos if by_pos[pos] >= MIN_POSITION_GAMES else 'DH'
+            else:
+                positions[person['id']] = 'DH'
+    return positions
+
+
 def on_base(s):
     return s['hits'] + s['baseOnBalls'] + s['hitByPitch']
 
@@ -202,15 +240,18 @@ def build_report(start_date):
         max(1, sum(s['plateAppearances'] for s in season_stats.values()))
     print(f"League OBP: {lg_obp:.3f} | League HR/PA: {lg_hr_rate:.4f}")
 
+    # ── Positions actually played this season (up to the week) ──
+    candidates = [pid for pid, s in season_stats.items()
+                  if pid in current_team and s['plateAppearances'] >= MIN_PA]
+    fielded = fielded_positions(candidates, date(season, 1, 1), recent_end, season)
+    print(f"Fielding positions found: {len(fielded)} of {len(candidates)} candidates")
+
     # ── Build infielder table ──
     rows = []
-    for player_id, s in season_stats.items():
-        if player_id not in current_team:       # injured, minors, or released
-            continue
-        position = roster_position.get(player_id) or s['position']
+    for player_id in candidates:                # on active roster, enough PA
+        s = season_stats[player_id]
+        position = fielded.get(player_id) or s['position'] or roster_position.get(player_id)
         if position not in INFIELD_POSITIONS:
-            continue
-        if s['plateAppearances'] < MIN_PA:
             continue
 
         denom = obp_denominator(s)
