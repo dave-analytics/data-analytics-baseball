@@ -20,10 +20,10 @@ from Python fundamentals through original statistical research.
 ### PRS — Player Reliability Score
 An original MLB statistic measuring reliable all-around value:
 how good a player is × how much he actually plays.
-Combines three-season hitting quality, an age adjustment,
-base-running, defense, positional value, and plate-appearance
-availability. Backtested out of sample: predicts next-season WAR
-at r = 0.66 — matching prior-year WAR itself.
+Combines three-season hitting quality (with minor-league stats
+for young players), an age curve, base-running, defense, positional
+value, and plate-appearance availability. Backtested out of sample:
+predicts next-season WAR at r = 0.67 — slightly better than prior-year WAR.
 
 📁 [/prs](./prs)
 
@@ -51,7 +51,7 @@ Phase 1 and Phase 2 of the analytics roadmap.
 
 ## Dashboard
 
-### PRS Rankings — 2026 Top 10 (v3)
+### PRS Rankings — 2026 Top 10 (v4)
 ![PRS Rankings Dashboard](prs/PRS_Rankings_Dashboard.png)
 
 ### Does PRS Predict Next Season? (built from 2022–24, tested on 2025 WAR)
