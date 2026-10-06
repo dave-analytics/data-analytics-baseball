@@ -18,16 +18,19 @@ from Python fundamentals through original statistical research.
 ## Projects
 
 ### PRS — Player Reliability Score
-An original MLB statistic measuring offensive reliability.
-Combines weighted hitting metrics, age-adjusted availability, 
-and an injury resilience modifier built from game log data.
-Validated at r = 0.675 against 2026 WAR across 375 qualified players.
+An original MLB statistic measuring offensive reliability:
+how well a player hits × how much he actually plays.
+Combines three-season hitting quality, an age adjustment,
+and plate-appearance availability. Backtested out of sample:
+predicts next-season WAR at r = 0.57 on seasons it was never tuned on.
 
 📁 [/prs](./prs)
 
 ### Infield Weekly Report
-Live MLB Stats API report pulling current standings, 
-batting leaders, and team stats. Built with Python and requests.
+Weekly fantasy rankings for C, 1B, 2B, 3B, and SS from the live
+MLB Stats API. Scores on-base ability, power, and expected starts
+(z-scored, regressed to the mean), filters out injured players,
+and runs for any week: `python infield_report.py --start 2026-05-04`.
 
 📁 [/infield-report](./infield-report)
 
@@ -47,15 +50,15 @@ Phase 1 and Phase 2 of the analytics roadmap.
 
 ## Dashboard
 
-### PRS Rankings — Top 10 Players
+### PRS Rankings — Top 10 Players (v1, May 2026)
 ![PRS Rankings Dashboard](prs/PRS_Rankings_Dashboard.png)
 
-### PRS vs WAR Correlation
+### PRS vs WAR Correlation (v1, same-season)
 ![PRS vs WAR Scatter](prs/PRS_vs_WAR_Scatter.png)
 
 ---
 
 ## Tech Stack
 - Python 3.14
-- pandas · matplotlib · requests · fuzzywuzzy
-- MLB Stats API ·
+- pandas · matplotlib · requests
+- MLB Stats API · Baseball Reference
