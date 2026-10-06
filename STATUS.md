@@ -6,11 +6,11 @@ Public sports analytics portfolio: PRS (README only; code kept private), Infield
 
 ## Last change
 
-2026-10-06 — Infield report overhaul + live May 4–10 rerun; private PRS backtest and v2→v3 (v1 r 0.46 → v3 r 0.66 on 2024→2025 WAR); rewrote `prs/PRS_README.md` and root README to replace the same-season r = 0.675 claim with the backtest results.
+2026-10-06 — Infield report overhaul + live May 4–10 rerun; private PRS backtest and v2→v3 (v1 r 0.46 → v3 r 0.66 on 2024→2025 WAR); rewrote both READMEs around the out-of-sample backtest and rebuilt the PRS chart images for v3.
 
 ## Next step
 
-Merge PR #1. Then rebuild the PRS dashboard images (`prs/*.png`, still v1 from May 2026) using PRS v3 rankings and a next-season WAR scatter.
+Merge PR #1. Then pick the next PRS item from `prs/PRS_README.md` "What's Next" (PRS-P pitcher version or Tableau leaderboard).
 
 ## Blockers
 

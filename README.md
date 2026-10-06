@@ -51,10 +51,10 @@ Phase 1 and Phase 2 of the analytics roadmap.
 
 ## Dashboard
 
-### PRS Rankings — Top 10 Players (v1, May 2026)
+### PRS Rankings — 2026 Top 10 (v3)
 ![PRS Rankings Dashboard](prs/PRS_Rankings_Dashboard.png)
 
-### PRS vs WAR Correlation (v1, same-season)
+### Does PRS Predict Next Season? (built from 2022–24, tested on 2025 WAR)
 ![PRS vs WAR Scatter](prs/PRS_vs_WAR_Scatter.png)
 
 ---

@@ -77,17 +77,16 @@ Pete Crow-Armstrong  Chicago Cubs             24   726  .372   45  26.3
 Aaron Judge          New York Yankees         34   285  .360   18  26.0
 ```
 
-## Dashboard (PRS v1, May 2026)
+## Dashboard (PRS v3)
 
-### PRS Rankings — Top 10 Players
+### PRS Rankings — 2026 Top 10
 ![PRS Rankings Dashboard](PRS_Rankings_Dashboard.png)
 
-### PRS vs WAR Correlation
+### Out-of-Sample Validation — PRS (2022–24 data) vs. 2025 WAR, r = 0.66
 ![PRS vs WAR Scatter](PRS_vs_WAR_Scatter.png)
 
 ## What's Next
 
-- **Updated dashboard** — rebuild the charts with PRS v3 and next-season validation
 - **PRS-P** — a pitcher version using ERA, strikeout rate, and innings pitched
 - **Tableau dashboard** — interactive PRS leaderboard by position
 - **Performance Resilience Score** — revisit resilience with larger samples (e.g. full months, minor-league returns) and keep it only if it improves the backtest
