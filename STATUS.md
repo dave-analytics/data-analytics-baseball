@@ -10,8 +10,8 @@ Public sports analytics portfolio: PRS (write-up and charts only, code not in re
 
 ## Next step
 
-PRS stays private (not in this repo). Reviewed the private script; next is an out-of-sample backtest (build PRS from 2022–24 → test vs 2025 WAR, 2023–25 → 2026 WAR), once Dave uploads WAR_2024/2025/2026 CSVs. Merge PR #1 (infield report) in the meantime.
+PRS stays private (not in this repo). Backtest done privately: PRS v2 predicts next-season WAR at r ≈ 0.57 out-of-sample vs 0.46 for v1. Next: Dave decides whether to adopt v2, then update `prs/PRS_README.md` — its "r = 0.675 vs 2026 WAR" claim was same-season against a partial (~May) 2026 WAR file. Merge PR #1 (infield report).
 
 ## Blockers
 
-PRS backtest waiting on Dave's Baseball Reference WAR CSVs (2024–2026).
+None.
