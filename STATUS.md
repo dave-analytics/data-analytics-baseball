@@ -1,19 +1,17 @@
 # Status — data-analytics-baseball
 
-_Starter status generated from repo history — review and correct._
-
 ## Current state
 
-Public sports analytics portfolio (Python, SQL, pandas, MLB Stats API) documenting a self-directed analytics roadmap. Contains the Player Reliability Score (PRS, validated at r = 0.675 against 2026 WAR across 375 qualified players), an Infield Weekly Report, a Yahoo Fantasy pitcher tracker, learning/review files, and the analytics roadmap document (v8.0).
+Public sports analytics portfolio: PRS (Player Reliability Score — write-up and charts only, code not in repo), Infield Weekly Report, Yahoo Fantasy pitcher tracker, and learning files. The infield report was just rewritten for accuracy; it passes a mocked end-to-end test but has not yet been run against the live MLB Stats API.
 
 ## Last change
 
-2026-05-25 — Roadmap updated to v8.0 (Tableau); the v7.0 document was removed.
+2026-10-06 — Infield report accuracy overhaul: z-scored weights (OBP/HR/starts now actually 50/30/20), regression to the mean, PA-weighted recent form (max 25%), active-roster filter drops IL players, paginated stats pulls, postponed games skipped, team-ID merge, traded-player handling, no future-data leakage for past weeks, `--start`/`--out-dir` CLI args instead of hardcoded dates and Desktop paths.
 
 ## Next step
 
-Needs Dave's input. `prs/PRS_README.md` lists "What's Next" ideas without an order: PRS-P (pitcher version), a Tableau PRS leaderboard by position, a Performance Resilience Score, and backtesting prior PRS against future WAR.
+Dave: run `python infield-report/infield_report.py --start 2026-05-04` locally (the MLB API is blocked from the cloud sandbox), sanity-check the rankings against the old May 4–10 CSV, then commit the new output. After that, push the PRS script so its validation can be redone out-of-sample (tune on 2024, test on 2025 WAR).
 
 ## Blockers
 
-Needs Dave's input — none recorded.
+PRS review is blocked until the PRS source code is added to the repo.
