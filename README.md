@@ -18,11 +18,12 @@ from Python fundamentals through original statistical research.
 ## Projects
 
 ### PRS — Player Reliability Score
-An original MLB statistic measuring offensive reliability:
-how well a player hits × how much he actually plays.
+An original MLB statistic measuring reliable all-around value:
+how good a player is × how much he actually plays.
 Combines three-season hitting quality, an age adjustment,
-and plate-appearance availability. Backtested out of sample:
-predicts next-season WAR at r = 0.57 on seasons it was never tuned on.
+base-running, defense, positional value, and plate-appearance
+availability. Backtested out of sample: predicts next-season WAR
+at r = 0.66 — matching prior-year WAR itself.
 
 📁 [/prs](./prs)
 
