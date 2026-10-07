@@ -80,6 +80,7 @@ Two players can share the same projection with very different risk. Every PRS+ f
 - **v2–v4** added availability, defense/base-running/position, and young-player handling, validated on 2024–2026.
 - **v5 (PRS+)** re-tuned everything on 2006–2015, added overall batting value, switched to the PRS+ index, and was tested on 11 unseen seasons against Marcel.
 - **v6** added 80% WAR ranges, playing-time odds, and durability labels, validated on 2016–2026.
+- **PRS-P+** extended the method to pitchers, validated the same way against Marcel.
 
 ## Sample Output — PRS+, 2026
 
@@ -98,6 +99,33 @@ rank  name                 age   PRS+   proj. WAR   80% range    500+ PA   durab
 ### Does PRS+ predict next season? 2025 forecasts vs. actual
 ![PRS vs WAR Scatter](PRS_vs_WAR_Scatter.png)
 
+## PRS-P+ — Pitchers
+
+The same idea for pitchers: **how good he is × how many innings he delivers**, on an index where **100 = an average MLB pitcher in a regular role** (the top 300, 10 per team). Every 100 points is roughly **1.0 projected WAR**.
+
+- **Pitcher quality** — strikeout rate, walk rate, and overall pitching value per batter faced over the last two seasons (pitchers change fast, so the most recent season counts three times as much and older seasons don't help), plus translated minor-league strikeout rates for young arms and an age curve.
+- **Availability** — innings over the last two seasons, skipping pre-debut seasons, with a role bonus for starters (who pile up innings).
+
+**Validation:** same protocol as hitters — tuned on 2006–2015, tested on 2016–2026 against Marcel.
+
+![PRS-P vs Marcel](PRS_P_vs_Marcel.png)
+
+| Test seasons 2016–2026 (11 seasons) | **PRS-P+** | Marcel | Last year's WAR |
+|---|---|---|---|
+| Correlation with actual WAR (r) | **0.633** | 0.622 | 0.592 |
+| Average miss (WAR) | **0.58** | 0.61 | 0.64 |
+| Within 1 WAR of actual | **80.9%** | 79.3% | 78.5% |
+| Top 25 that finished top 50 in WAR | **15.8** | 15.1 | 14.5 |
+| Seasons PRS-P+ beat Marcel (r / average miss) | — | 10 of 11 / 11 of 11 | — |
+
+<sub>~530–690 pitchers per season with 50+ innings over the prior three seasons. Target: MLB Stats API pitching WAR (2020 scaled to 162 games).</sub>
+
+- PRS-P+ beats Marcel for **both starters (r 0.60 vs 0.58) and relievers (0.44 vs 0.38)** — relievers are harder to project for everyone, but that's where PRS-P+ gains the most.
+- **Little age bias:** Marcel underrates pitchers 25 and under (+0.17 WAR) and overrates those 35+ (−0.18); PRS-P+ stays within ±0.05 at every age.
+- The edge over Marcel is smaller for pitchers than for hitters — pitcher WAR is noisier year to year — but it is consistent: a smaller average miss in all 11 test seasons.
+
+![PRS-P+ 2026 top 10](PRS_P_Rankings_2026.png)
+
 ## Tech Stack
 
 - **Python 3.14**
@@ -109,7 +137,7 @@ rank  name                 age   PRS+   proj. WAR   80% range    500+ PA   durab
 ## What's Next
 
 - **2027 preseason rankings** — published before Opening Day and graded at season's end
-- **PRS-P** — a pitcher version
+- **PRS-P+ risk ranges** — 80% WAR ranges and innings odds for pitchers, like the hitter version
 - **Tableau dashboard** — interactive PRS+ leaderboard by position
 
 ## About
