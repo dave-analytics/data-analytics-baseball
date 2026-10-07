@@ -80,7 +80,7 @@ Two players can share the same projection with very different risk. Every PRS+ f
 - **v2–v4** added availability, defense/base-running/position, and young-player handling, validated on 2024–2026.
 - **v5 (PRS+)** re-tuned everything on 2006–2015, added overall batting value, switched to the PRS+ index, and was tested on 11 unseen seasons against Marcel.
 - **v6** added 80% WAR ranges, playing-time odds, and durability labels, validated on 2016–2026.
-- **PRS-P+** extended the method to pitchers, validated the same way against Marcel.
+- **PRS-P+** extended the method to pitchers, validated the same way against Marcel, with its own 80% ranges and workload odds.
 
 ## Sample Output — PRS+, 2026
 
@@ -126,6 +126,23 @@ The same idea for pitchers: **how good he is × how many innings he delivers**, 
 
 ![PRS-P+ 2026 top 10](PRS_P_Rankings_2026.png)
 
+### Pitcher risk: range and workload
+
+Like the hitter version, every PRS-P+ forecast comes with:
+
+- **An 80% range** for next-season WAR, sized by projection, role, age, innings history, and experience (downside and upside separately).
+- **Workload odds** — the chance of a full workload next season: **150+ IP for starters, 50+ IP for relievers** — with a durability label: **Durable** (60%+), **Average** (40–60%), or **Workload risk** (under 40%). The cutoffs sit lower than for hitters because even the most durable starters reach 150 IP only about two-thirds of the time.
+
+![PRS-P+ 2026 risk](PRS_P_Risk_2026.png)
+
+![PRS-P+ risk validation](PRS_P_Risk_Validation.png)
+
+Tested on 2016–2026, with each season built only from earlier seasons:
+- **79.6% of outcomes landed inside the 80% ranges** — starters 79%, relievers 80%, 78–80% for most ages. Two honest gaps: the small group of aces projected 2.5+ WAR came in at 76%, and pitchers 35+ at 86% (ranges slightly wide).
+- **Workload odds match reality** for both roles — relievers given 48% reached 50 IP 49% of the time; starters given 33% reached 150 IP 35% of the time. Starter innings have been falling for years, so the odds are recalibrated each season on the most recent three, separately for starters and relievers.
+- **Durability separates workload:** Durable starters reached 150 IP 61% of the time (median 172 IP the next season) vs. 27% for Workload-risk starters (median 103 IP).
+- As with hitters, durability predicts **innings, not performance** — it doesn't tell you who will underperform their WAR forecast.
+
 ## Tech Stack
 
 - **Python 3.14**
@@ -137,7 +154,6 @@ The same idea for pitchers: **how good he is × how many innings he delivers**, 
 ## What's Next
 
 - **2027 preseason rankings** — published before Opening Day and graded at season's end
-- **PRS-P+ risk ranges** — 80% WAR ranges and innings odds for pitchers, like the hitter version
 - **Tableau dashboard** — interactive PRS+ leaderboard by position
 
 ## About
