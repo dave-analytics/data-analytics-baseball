@@ -57,22 +57,42 @@ All settings were tuned on **2006–2015 only**. The **2016–2026** seasons wer
 - **No age bias.** Marcel underrates players 23 and under by about 0.6 WAR and overrates players 34+ by about 0.35 WAR; PRS+ misses every age group by about the same small amount.
 - **Where it's even:** at the very top of the rankings PRS+ and Marcel identify stars about equally well, and neither can foresee true breakouts — players whose past numbers gave no hint of a 6–7 WAR season.
 
+## Risk: Range and Durability
+
+Two players can share the same projection with very different risk. Every PRS+ forecast comes with:
+
+- **An 80% range** for next-season WAR — 1 in 10 players should finish below it, 1 in 10 above. Ranges are sized by projection level, age, MLB experience, and playing-time history, and the downside and upside are sized separately.
+- **Odds of 500+ plate appearances** next season, with a **durability label**: **Durable** (70%+), **Average** (50–70%), or **Playing-time risk** (under 50%).
+
+![PRS+ 2026 risk](PRS_Risk_2026.png)
+
+**Are they honest?** Tested on 2016–2026, with each season's ranges and odds built only from earlier seasons:
+
+![Risk validation](PRS_Risk_Validation.png)
+
+- **82% of actual outcomes landed inside the 80% ranges** — 79–84% for every projection tier and every age group, and 80–86% in every full season (2020's 60-game season: 72%).
+- **Playing-time odds match reality:** players given 75% reached 500 PA 77% of the time; players given 32%, 32% of the time.
+- **Durability separates playing time:** Durable players reached 500 PA 79% of the time and fell under 300 PA only 5–9% of the time; Playing-time-risk players reached 500 PA 33–49% of the time.
+- **What it can't do:** durability does *not* predict who underperforms their WAR forecast. Among players with similar projections, Durable and Playing-time-risk players lost 2+ WAR at about the same rate — performance swings are mostly noise. So PRS+ reports a range for performance and odds for playing time, and makes no "volatile vs. steady" performance call the data doesn't support.
+
 ### Version history
 - **v1** was validated against same-season, partial-year WAR (r = 0.675). That mostly confirmed PRS and WAR were measuring the same two months of hitting, not that PRS predicts anything. Its resilience modifier (OBP before vs. after an absence) didn't improve forecasts and was removed.
 - **v2–v4** added availability, defense/base-running/position, and young-player handling, validated on 2024–2026.
 - **v5 (PRS+)** re-tuned everything on 2006–2015, added overall batting value, switched to the PRS+ index, and was tested on 11 unseen seasons against Marcel.
+- **v6** added 80% WAR ranges, playing-time odds, and durability labels, validated on 2016–2026.
 
 ## Sample Output — PRS+, 2026
 
 ![PRS Rankings Dashboard](PRS_Rankings_Dashboard.png)
 
 ```
-rank  name                 age   2026 PA   PRS+   proj. WAR
-1     Bobby Witt Jr.        26     632     367      7.1
-2     Pete Crow-Armstrong   24     726     327      6.4
-3     Juan Soto             27     482     296      5.8
-4     Elly De La Cruz       24     636     295      5.7
-5     JJ Wetherholt         23     619     285      5.6
+rank  name                 age   PRS+   proj. WAR   80% range    500+ PA   durability
+1     Bobby Witt Jr.        26    367      7.1      3.6 – 9.7      83%     Durable
+2     Pete Crow-Armstrong   24    327      6.4      2.7 – 8.8      83%     Durable
+3     Juan Soto             27    296      5.8      2.2 – 7.9      78%     Durable
+4     Elly De La Cruz       24    295      5.7      2.1 – 8.0      83%     Durable
+5     JJ Wetherholt         23    285      5.6      2.1 – 7.8      82%     Durable
+17    Aaron Judge           34    220      4.3      2.0 – 5.8      34%     Playing-time risk
 ```
 
 ### Does PRS+ predict next season? 2025 forecasts vs. actual
@@ -88,7 +108,6 @@ rank  name                 age   2026 PA   PRS+   proj. WAR
 
 ## What's Next
 
-- **Risk ranges** — an 80% range for each player's projection (e.g. "4.5–8.0 WAR") and playing-time odds, checked against 20 years of history
 - **2027 preseason rankings** — published before Opening Day and graded at season's end
 - **PRS-P** — a pitcher version
 - **Tableau dashboard** — interactive PRS+ leaderboard by position
