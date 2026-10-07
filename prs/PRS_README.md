@@ -1,97 +1,97 @@
-# PRS — Player Reliability Score
+# PRS+ — Player Reliability Score
 
 **An original baseball statistic built from scratch in Python.**
 
-## What Is PRS?
+## What Is PRS+?
 
-PRS (Player Reliability Score) measures how much **total value** you can count on getting from an MLB position player next season — not just how good he is, but how reliably he'll be on the field delivering it.
+PRS+ measures how much **total value** you can count on getting from an MLB position player next season — not just how good he is, but how reliably he'll be on the field delivering it.
 
-Most fantasy baseball and front office metrics measure peak performance. PRS measures *dependable* performance. A player who posts elite numbers in 90 games is less valuable than one who posts solid numbers in 155 games. PRS quantifies that gap.
+**How to read it:** 100 = an average MLB regular. 200 = twice the reliable value of an average regular. Every 100 points is roughly **1.9 projected WAR** (100 ≈ 1.9, 200 ≈ 3.8, 300 ≈ 5.6).
+
+Most fantasy baseball and front office metrics measure peak performance. PRS+ measures *dependable* performance. A player who posts elite numbers in 90 games is less valuable than one who posts solid numbers in 155 games. PRS+ quantifies that gap.
 
 ## The Core Idea
 
-PRS = **how good he is** × **how much he plays**
+PRS+ = **how good he is** × **how much he plays**
 
-1. **Hitting Quality** — on-base ability and power over the last three seasons, plus minor-league performance for young players
+1. **Hitting** — on-base ability, power, and overall batting value over the last three seasons, plus minor-league performance for young players
 2. **Age Curve** — young players improve faster than veterans decline
 3. **Base-Running, Defense & Position** — runs added on the bases and in the field, plus credit for playing a harder position
 4. **Availability** — how many plate appearances the player has actually delivered over the last three seasons
 
-The result is a single score that reflects both a player's all-around value and how likely he is to be in the lineup to provide it.
-
 ## Methodology
 
-### Hitting Quality
-On-base percentage and home run rate from the last three seasons, weighted toward the most recent season. For players 27 and under, Triple-A and Double-A stats are blended in after translating them down to MLB level, so a prospect with a short MLB track record isn't judged on a handful of big-league at-bats alone. Rates are regressed toward league average, so a hot 150 plate appearances doesn't outrank a proven full season. Each stat is standardized (z-scored) before blending, so every component counts as much as its weight says.
+### Hitting
+On-base percentage, home run rate, and total batting runs from the last three seasons, weighted toward the most recent season. For players 27 and under, Triple-A and Double-A stats are blended in after translating them down to MLB level, so a prospect with a short MLB track record isn't judged on a handful of big-league at-bats alone. Each stat is standardized (z-scored) before blending, so every component counts as much as its weight says.
 
 ### Age Curve
-Players are adjusted by their age during the season (MLB's June 30 convention). The curve is asymmetric: players below their late-20s peak are expected to improve quickly, while veterans decline more gradually.
+Players are adjusted by their age during the season (MLB's June 30 convention). The curve is asymmetric: players below their late-20s peak are expected to improve, while veterans decline.
 
 ### Base-Running, Defense & Position
-Three-season base-running runs, fielding runs, and positional value (a shortstop is worth more than a first baseman with the same bat) from the MLB Stats API, converted to a per-600-plate-appearance rate and standardized. Hitting still carries the most weight.
+Three-season base-running runs, fielding runs, and positional value (a shortstop is worth more than a first baseman with the same bat) from the MLB Stats API, converted to a per-600-plate-appearance rate and standardized.
 
 ### Availability
-Plate appearances over the last three seasons, weighted toward the most recent. A missed season counts as zero — that's the reliability in Player Reliability Score. Seasons before a player's MLB debut are skipped rather than counted as missed, so rookies aren't penalized for not having been called up yet, and young players get a small bump for the playing time they tend to earn. Projections are capped at a full, healthy season.
+Plate appearances over the last three seasons, weighted toward the most recent. A missed season counts as zero — that's the reliability in Player Reliability Score. Seasons before a player's MLB debut are skipped rather than counted as missed, young players get a bump for the playing time they tend to earn, and projections are capped at a full, healthy season. The shortened 2020 season is scaled to a 162-game pace.
 
-## Validation
+## Validation — 21 Seasons vs. Marcel
 
-PRS is tested the hard way: build it using **only data available before a season**, then check how well it predicts that **next** season's WAR (Wins Above Replacement, Baseball Reference). Each version was tuned on one season and tested on seasons it had never seen.
+PRS+ is tested the hard way: build it using **only data available before a season**, then check how well it predicts that **next** season's WAR. It is compared against **Marcel**, the standard public baseline projection system (Tom Tango), and against simply using last season's WAR.
 
-| PRS built from | Tested against | v1 | v2 (offense only) | v3 (+ defense) | **v4 (current)** | Prior-year WAR | Plain OPS |
-|---|---|---|---|---|---|---|---|
-| 2021–2023 | 2024 WAR | 0.43 | 0.58 | 0.63 | **0.65** *(tuning season)* | — | 0.32 |
-| 2022–2024 | 2025 WAR | 0.46 | 0.57 | 0.66 | **0.67** | 0.66 | 0.35 |
-| 2023–2025 | 2026 WAR* | 0.34 | 0.38 | 0.41 | **0.42** | 0.43 | 0.29 |
+All settings were tuned on **2006–2015 only**. The **2016–2026** seasons were never seen during tuning.
 
-<sub>Pearson correlation (r), ~440–480 position players per season. \*2026 WAR is a partial-season snapshot (through late May), which lowers every correlation. Prior-year WAR = Baseball Reference WAR from the base season (not available for 2023).</sub>
+![PRS vs Marcel](PRS_vs_Marcel.png)
+
+| Test seasons 2016–2026 (11 seasons) | **PRS+** | Marcel | Last year's WAR |
+|---|---|---|---|
+| Correlation with actual WAR (r) | **0.669** | 0.644 | 0.618 |
+| Average miss (WAR) | **0.86** | 0.89 | 0.93 |
+| Within 2 WAR of actual | **88.9%** | 88.3% | 87.7% |
+| Top 25 that finished top 25 in WAR | **10.7** | 10.4 | 9.7 |
+| Seasons PRS+ beat Marcel (r / average miss) | — | 9 of 11 / 10 of 11 | — |
+
+<sub>~525–590 position players per season with 200+ plate appearances over the prior three seasons. Target: MLB Stats API WAR (2020 scaled to 162 games). Players with no MLB plate appearances the next season count as 0 WAR.</sub>
 
 **Key findings:**
-- PRS v4 predicts next-season WAR at **r ≈ 0.67 on data it was never tuned on** — slightly better than last season's WAR itself (0.66) and MLB's own WAR figure (0.64).
-- In practice (2025): the typical miss is under 1 WAR, 87% of players land within 2 WAR, and 18 of PRS's top 25 finished in the actual WAR top 50 (23 in the top 100).
-- **Availability was the biggest single improvement** (about +0.12 r over a rate-only score).
-- **Base-running, defense, and position added about +0.08 r**; each one helps on its own, with positional value contributing the most.
-- The age adjustment adds real predictive value (about +0.05 r).
-- **Young players are the hardest to project.** v4's debut-aware availability, asymmetric age curve, and minor-league stats raised accuracy for players 25 and under from r = 0.57 to 0.61 (2025). The remaining big misses are genuine breakouts — players whose MLB and minor-league numbers gave no hint of a 6–7 WAR season.
+- PRS+ beats Marcel in **9 of the 11 seasons it never saw**, with a smaller average miss in 10 of 11.
+- **Availability was the biggest single improvement** over a rate-only score; base-running, defense, and position were next.
+- **No age bias.** Marcel underrates players 23 and under by about 0.6 WAR and overrates players 34+ by about 0.35 WAR; PRS+ misses every age group by about the same small amount.
+- **Where it's even:** at the very top of the rankings PRS+ and Marcel identify stars about equally well, and neither can foresee true breakouts — players whose past numbers gave no hint of a 6–7 WAR season.
 
-### What changed from v1
-PRS v1 was validated against **same-season** 2026 WAR (r = 0.675), using a partial-season WAR file. That mostly confirmed that PRS and WAR were measuring the same two months of hitting, not that PRS predicts anything. Backtesting showed:
-- v1's **resilience modifier** (OBP in the 15 games before vs. after an absence) did not improve predictions — 15-game windows are too small to separate a real bounce-back from luck — so it was removed.
-- v1 had no true availability component; plate-appearance history alone predicted next-season WAR as well as v1 did.
-- Batting average was dropped as largely redundant with OBP.
-- v1 measured offense only, so it couldn't account for the defense, base-running, and positional value that WAR rewards.
+### Version history
+- **v1** was validated against same-season, partial-year WAR (r = 0.675). That mostly confirmed PRS and WAR were measuring the same two months of hitting, not that PRS predicts anything. Its resilience modifier (OBP before vs. after an absence) didn't improve forecasts and was removed.
+- **v2–v4** added availability, defense/base-running/position, and young-player handling, validated on 2024–2026.
+- **v5 (PRS+)** re-tuned everything on 2006–2015, added overall batting value, switched to the PRS+ index, and was tested on 11 unseen seasons against Marcel.
+
+## Sample Output — PRS+, 2026
+
+![PRS Rankings Dashboard](PRS_Rankings_Dashboard.png)
+
+```
+rank  name                 age   2026 PA   PRS+   proj. WAR
+1     Bobby Witt Jr.        26     632     367      7.1
+2     Pete Crow-Armstrong   24     726     327      6.4
+3     Juan Soto             27     482     296      5.8
+4     Elly De La Cruz       24     636     295      5.7
+5     JJ Wetherholt         23     619     285      5.6
+```
+
+### Does PRS+ predict next season? 2025 forecasts vs. actual
+![PRS vs WAR Scatter](PRS_vs_WAR_Scatter.png)
 
 ## Tech Stack
 
 - **Python 3.14**
-- **pandas** — data manipulation and weighted calculations
+- **pandas / numpy** — data manipulation, weighting, and backtesting
 - **requests** — MLB Stats API calls (no authentication required)
-- **MLB Stats API** — MLB and minor-league season stats, base-running/fielding/positional run values, player bios
-- **Baseball Reference** — WAR data for validation
-
-## Sample Output — PRS v4, 2026
-
-```
-name                 team                    age   PA   OBP   HR   prs
-Bobby Witt Jr.       Kansas City Royals       26   632  .359   18  26.6
-Shohei Ohtani        Los Angeles Dodgers      31   618  .377   30  26.5
-Pete Crow-Armstrong  Chicago Cubs             24   726  .372   45  26.3
-Juan Soto            New York Mets            27   482  .393   27  26.0
-Elly De La Cruz      Cincinnati Reds          24   636  .365   30  25.3
-```
-
-## Dashboard (PRS v4)
-
-### PRS Rankings — 2026 Top 10
-![PRS Rankings Dashboard](PRS_Rankings_Dashboard.png)
-
-### Out-of-Sample Validation — PRS (2022–24 data) vs. 2025 WAR, r = 0.67
-![PRS vs WAR Scatter](PRS_vs_WAR_Scatter.png)
+- **MLB Stats API** — MLB and minor-league stats, base-running/fielding/positional run values, WAR, player bios (2003–2026)
+- **matplotlib** — charts
 
 ## What's Next
 
-- **PRS-P** — a pitcher version using ERA, strikeout rate, and innings pitched
-- **Tableau dashboard** — interactive PRS leaderboard by position
-- **Performance Resilience Score** — revisit resilience with larger samples (e.g. full months, minor-league returns) and keep it only if it improves the backtest
+- **Risk ranges** — an 80% range for each player's projection (e.g. "4.5–8.0 WAR") and playing-time odds, checked against 20 years of history
+- **2027 preseason rankings** — published before Opening Day and graded at season's end
+- **PRS-P** — a pitcher version
+- **Tableau dashboard** — interactive PRS+ leaderboard by position
 
 ## About
 

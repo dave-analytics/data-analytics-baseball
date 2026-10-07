@@ -2,15 +2,15 @@
 
 ## Current state
 
-Public sports analytics portfolio: PRS (README only; code kept private), Infield Weekly Report (overhauled and verified on live MLB data), Yahoo pitcher tracker, and learning files. READMEs now describe PRS v4 (adds young-player handling: debut-aware availability, age curve, minor-league stats) and its out-of-sample validation (r ≈ 0.67 vs next-season WAR, slightly above prior-year WAR). Everything is on PR #1, awaiting merge.
+Public sports analytics portfolio: PRS+ (README and charts only; code kept private), Infield Weekly Report (overhauled, verified on live data), Yahoo pitcher tracker, learning files. PRS+ v5 is an index (100 = average regular) backtested over 21 seasons: tuned on 2006–15, beats Marcel in 9 of 11 unseen seasons (r 0.669 vs 0.644). All work is on PR #1, awaiting merge.
 
 ## Last change
 
-2026-10-06 — Infield report overhaul + live May 4–10 rerun; private PRS backtest, v2→v3→v4 (v1 r 0.46 → v4 r 0.67 on 2024→2025 WAR; under-25s 0.57 → 0.61); rewrote both READMEs around the out-of-sample backtest and rebuilt the PRS chart images for v4.
+2026-10-07 — PRS v5 / PRS+: pulled 2003–2026 MLB + minor-league data, built a 20-season backtest with a Marcel baseline, re-tuned on 2006–15 only, added the PRS+ index and batting runs; rewrote PRS README; new charts (PRS+ top 10, PRS vs Marcel by season, 2025 forecast scatter).
 
 ## Next step
 
-Merge PR #1. Then pick the next PRS item from `prs/PRS_README.md` "What's Next" (PRS-P pitcher version or Tableau leaderboard).
+Merge PR #1. Then build PRS+ risk ranges (80% projection range + playing-time odds, calibrated on 2006–2015, checked on 2016–2026), then PRS-P for pitchers.
 
 ## Blockers
 

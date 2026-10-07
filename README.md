@@ -17,13 +17,12 @@ from Python fundamentals through original statistical research.
 
 ## Projects
 
-### PRS — Player Reliability Score
+### PRS+ — Player Reliability Score
 An original MLB statistic measuring reliable all-around value:
-how good a player is × how much he actually plays.
-Combines three-season hitting quality (with minor-league stats
-for young players), an age curve, base-running, defense, positional
-value, and plate-appearance availability. Backtested out of sample:
-predicts next-season WAR at r = 0.67 — slightly better than prior-year WAR.
+how good a player is × how much he actually plays, on an index
+where 100 = an average MLB regular. Backtested over 21 seasons:
+on the 11 seasons it was never tuned on, PRS+ beats the Marcel
+projection system in 9 (r = 0.669 vs 0.644 against next-season WAR).
 
 📁 [/prs](./prs)
 
@@ -51,15 +50,15 @@ Phase 1 and Phase 2 of the analytics roadmap.
 
 ## Dashboard
 
-### PRS Rankings — 2026 Top 10 (v4)
+### PRS+ Rankings — 2026 Top 10
 ![PRS Rankings Dashboard](prs/PRS_Rankings_Dashboard.png)
 
-### Does PRS Predict Next Season? (built from 2022–24, tested on 2025 WAR)
-![PRS vs WAR Scatter](prs/PRS_vs_WAR_Scatter.png)
+### PRS+ vs. Marcel — 21 Seasons of Forecasts
+![PRS vs Marcel](prs/PRS_vs_Marcel.png)
 
 ---
 
 ## Tech Stack
 - Python 3.14
-- pandas · matplotlib · requests
+- pandas · numpy · matplotlib · requests
 - MLB Stats API · Baseball Reference
