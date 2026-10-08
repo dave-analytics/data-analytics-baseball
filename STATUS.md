@@ -6,12 +6,12 @@ Public sports analytics portfolio: PRS+ (README and charts only; code kept priva
 
 ## Last change
 
-2026-10-07 — PRS-P+ (pitchers): 21-season backtest vs Marcel (beats Marcel 10 of 11 unseen seasons, smaller average miss 11 of 11), then pitcher risk: 80% WAR ranges (79.6% coverage on 2016–26) and role-specific workload odds (150+ IP SP / 50+ IP RP) with durability labels. PRS README + 4 pitcher charts. (Earlier today: PR #1 merged.)
+2026-10-08 — PRS-P+ (pitchers): 21-season backtest vs Marcel (beats Marcel 10 of 11 unseen seasons, smaller average miss 11 of 11), then pitcher risk: 80% WAR ranges (79.6% coverage on 2016–26) and role-specific workload odds (150+ IP SP / 50+ IP RP) with durability labels. PRS README + 4 pitcher charts. (Earlier today: PR #1 merged.)
 
 ## Next step
 
-Open a PR to bring the PRS-P+ work (on `claude/beautiful-heisenberg-4v8ou2`) into main, then publish 2027 preseason PRS+ and PRS-P+ rankings with risk ranges as a dated GitHub release before Opening Day.
+After the 2026 postseason ends: rerun `prs_v6.py` and `prs_p.py` with final 2026 data and publish 2027 preseason PRS+ and PRS-P+ rankings (with risk ranges) as a dated GitHub release, to be graded after the 2027 season. Nothing to do until then.
 
 ## Blockers
 
-None.
+Waiting for the 2026 postseason to finish before posting preseason rankings (Dave's call).
