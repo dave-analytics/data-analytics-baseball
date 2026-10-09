@@ -103,6 +103,8 @@ rank  name                 age   PRS+   proj. WAR   80% range    500+ PA   durab
 
 The same idea for pitchers: **how good he is × how many innings he delivers**, on an index where **100 = an average MLB pitcher in a regular role** (the top 300, 10 per team). Every 100 points is roughly **1.0 projected WAR**.
 
+> **Which WAR?** PRS-P+ projects **FIP-based WAR** (the MLB Stats API's pitching WAR), which credits strikeouts, walks, and home runs — the outcomes a pitcher controls — and mostly ignores runs that score on balls in play. It's the standard target for pitcher projections because it's steadier year to year. It is **not** the same as ERA. Paul Skenes in 2026 posted 4.2 FIP-based WAR (12th among pitchers) but only 3.0 runs-allowed WAR (33rd) after his ERA rose from 1.97 to 3.82. That's why every pitcher also gets a separate range for runs-allowed WAR (below).
+
 - **Pitcher quality** — strikeout rate, walk rate, and overall pitching value per batter faced over the last two seasons (pitchers change fast, so the most recent season counts three times as much and older seasons don't help), plus translated minor-league strikeout rates for young arms and an age curve.
 - **Availability** — innings over the last two seasons, skipping pre-debut seasons, with a role bonus for starters (who pile up innings).
 
@@ -112,13 +114,13 @@ The same idea for pitchers: **how good he is × how many innings he delivers**, 
 
 | Test seasons 2016–2026 (11 seasons) | **PRS-P+** | Marcel | Last year's WAR |
 |---|---|---|---|
-| Correlation with actual WAR (r) | **0.633** | 0.622 | 0.592 |
+| Correlation with actual WAR (r), FIP-based | **0.633** | 0.622 | 0.592 |
 | Average miss (WAR) | **0.58** | 0.61 | 0.64 |
 | Within 1 WAR of actual | **80.9%** | 79.3% | 78.5% |
 | Top 25 that finished top 50 in WAR | **15.8** | 15.1 | 14.5 |
 | Seasons PRS-P+ beat Marcel (r / average miss) | — | 10 of 11 / 11 of 11 | — |
 
-<sub>~530–690 pitchers per season with 50+ innings over the prior three seasons. Target: MLB Stats API pitching WAR (2020 scaled to 162 games).</sub>
+<sub>~530–690 pitchers per season with 50+ innings over the prior three seasons. Target: MLB Stats API pitching WAR, which is FIP-based (2020 scaled to 162 games).</sub>
 
 - PRS-P+ beats Marcel for **both starters (r 0.60 vs 0.58) and relievers (0.44 vs 0.38)** — relievers are harder to project for everyone, but that's where PRS-P+ gains the most.
 - **Little age bias:** Marcel underrates pitchers 25 and under (+0.17 WAR) and overrates those 35+ (−0.18); PRS-P+ stays within ±0.05 at every age.
@@ -142,6 +144,27 @@ Tested on 2016–2026, with each season built only from earlier seasons:
 - **Workload odds match reality** for both roles — relievers given 48% reached 50 IP 49% of the time; starters given 33% reached 150 IP 35% of the time. Starter innings have been falling for years, so the odds are recalibrated each season on the most recent three, separately for starters and relievers.
 - **Durability separates workload:** Durable starters reached 150 IP 61% of the time (median 172 IP the next season) vs. 27% for Workload-risk starters (median 103 IP).
 - As with hitters, durability predicts **innings, not performance** — it doesn't tell you who will underperform their WAR forecast.
+
+### Runs-allowed range
+
+Because ERA-based results swing more than FIP-based ones, each pitcher also gets an **80% range for runs-allowed WAR** (RA9-WAR — WAR built from the runs that actually scored). It's centered on the same projection, sized and tested the same way, and it's about 28% wider than the FIP-based range. In the 2026 top 20 chart above it's the thin line under each bar.
+
+- **2016–2026 test:** 78.7% of runs-allowed outcomes landed inside (starters 78%, relievers 79%). The small group of aces projected 2.5+ WAR came in narrow at 74%.
+- **Judged on runs allowed,** PRS-P+ still edges Marcel over the 11 test seasons (r 0.553 vs. 0.545), though the margin is thin.
+
+### 2026 report card
+
+Preseason 2026 projections, built only from data through 2025, compared with what happened:
+
+| 2026 season | PRS-P+ | Marcel | Last year's WAR |
+|---|---|---|---|
+| Correlation with FIP-based WAR | **0.625** | 0.610 | 0.598 |
+| Correlation with runs-allowed WAR | 0.519 | 0.519 | — |
+| Average miss (FIP-based WAR) | **0.55** | 0.60 | 0.61 |
+| Inside the 80% range | 79% (FIP-based) · 78% (runs-allowed) | — | — |
+
+- **Hits:** Cristopher Sánchez (projected 4.2, actual 6.2), Tarik Skubal (5.3 → 5.2), Yoshinobu Yamamoto (3.6 → 4.7).
+- **Misses:** the preseason #1, Paul Skenes (5.5 → 4.2 FIP-based, 3.0 runs-allowed — just under his runs-allowed floor); injured aces Garrett Crochet (30 IP) and Hunter Greene (28 IP); and young breakouts the model was too cautious on — Jacob Misiorowski (1.3 → 6.6) and Cam Schlittler (1.3 → 6.2).
 
 ## Tech Stack
 

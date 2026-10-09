@@ -23,7 +23,8 @@ how good a player is × how much he actually plays, on an index
 where 100 = an average MLB regular. Backtested over 21 seasons:
 on the 11 seasons it was never tuned on, PRS+ beats the Marcel
 projection system in 9 (r = 0.669 vs 0.644 against next-season WAR).
-Pitcher version **PRS-P+** beats Marcel in 10 of 11 unseen seasons,
+Pitcher version **PRS-P+** (projects FIP-based WAR, with a separate
+range for runs-allowed WAR) beats Marcel in 10 of 11 unseen seasons,
 with a smaller average miss in all 11.
 
 📁 [/prs](./prs)
