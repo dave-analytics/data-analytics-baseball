@@ -6,7 +6,7 @@ Public sports analytics portfolio: PRS+ (README and charts only; code kept priva
 
 ## Last change
 
-2026-10-09 — Built a private PRS+ Dashboard on claude.ai (https://claude.ai/artifact/Dux6TFRtAHzz3oYBr9ZJ5j): Hitters and Pitchers tabs (2027 rankings, 80% ranges, durability, searchable tables) and an Accuracy tab (21-season backtest vs Marcel, range coverage, playing-time odds). Built from PRS outputs only, no formula. (2026-10-08: PR #2 merged — PRS-P+ with risk ranges.)
+2026-10-09 — Graded preseason 2026 PRS-P against the actual 2026 season (r 0.625 vs Marcel 0.610; 79% of outcomes inside 80% ranges). Built a private PRS+ Dashboard on claude.ai (https://claude.ai/artifact/Dux6TFRtAHzz3oYBr9ZJ5j): Hitters and Pitchers tabs (2027 rankings, 80% ranges, durability, searchable tables) and an Accuracy tab (21-season backtest vs Marcel, range coverage, playing-time odds). Built from PRS outputs only, no formula. (2026-10-08: PR #2 merged — PRS-P+ with risk ranges.)
 
 ## Next step
 
