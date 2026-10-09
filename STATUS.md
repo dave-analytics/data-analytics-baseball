@@ -6,11 +6,11 @@ Public sports analytics portfolio: PRS+ (README and charts only; code kept priva
 
 ## Last change
 
-2026-10-08 — PRS-P+ (pitchers): 21-season backtest vs Marcel (beats Marcel 10 of 11 unseen seasons, smaller average miss 11 of 11), then pitcher risk: 80% WAR ranges (79.6% coverage on 2016–26) and role-specific workload odds (150+ IP SP / 50+ IP RP) with durability labels. PRS README + 4 pitcher charts. (Earlier today: PR #1 merged.)
+2026-10-09 — Built a private PRS+ Dashboard on claude.ai (https://claude.ai/artifact/Dux6TFRtAHzz3oYBr9ZJ5j): Hitters and Pitchers tabs (2027 rankings, 80% ranges, durability, searchable tables) and an Accuracy tab (21-season backtest vs Marcel, range coverage, playing-time odds). Built from PRS outputs only, no formula. (2026-10-08: PR #2 merged — PRS-P+ with risk ranges.)
 
 ## Next step
 
-After the 2026 postseason ends: rerun `prs_v6.py` and `prs_p.py` with final 2026 data and publish 2027 preseason PRS+ and PRS-P+ rankings (with risk ranges) as a dated GitHub release, to be graded after the 2027 season. Nothing to do until then.
+After the 2026 postseason ends: rerun `prs_v6.py` and `prs_p.py` with final 2026 data and publish 2027 preseason PRS+ and PRS-P+ rankings (with risk ranges) as a dated GitHub release, to be graded after the 2027 season, and refresh the dashboard's data files with the final numbers. Nothing to do until then.
 
 ## Blockers
 
