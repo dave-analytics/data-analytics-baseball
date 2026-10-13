@@ -57,6 +57,8 @@ All settings were tuned on **2006–2015 only**. The **2016–2026** seasons wer
 - **No age bias.** Marcel underrates players 23 and under by about 0.6 WAR and overrates players 34+ by about 0.35 WAR; PRS+ misses every age group by about the same small amount.
 - **Where it's even:** at the very top of the rankings PRS+ and Marcel identify stars about equally well, and neither can foresee true breakouts — players whose past numbers gave no hint of a 6–7 WAR season.
 
+**Blended projection (v7).** The PRS+ index is pure PRS. The *projected WAR* next to it is now **65% PRS + 35% Marcel**, with each converted to WAR using its 2006–2015 fit. The two systems make different mistakes, so the blend is a little steadier than either one alone. On 2016–2026 the blend improved correlation from 0.669 to 0.673 and the average miss from 0.857 to 0.853 WAR, and it beat PRS alone in 8 of 11 seasons. It's a small gain, but a consistent one.
+
 ## Risk: Range and Durability
 
 Two players can share the same projection with very different risk. Every PRS+ forecast comes with:
@@ -70,9 +72,10 @@ Two players can share the same projection with very different risk. Every PRS+ f
 
 ![Risk validation](PRS_Risk_Validation.png)
 
-- **82% of actual outcomes landed inside the 80% ranges** — 79–84% for every projection tier and every age group, and 80–86% in every full season (2020's 60-game season: 72%).
-- **Playing-time odds match reality:** players given 75% reached 500 PA 77% of the time; players given 32%, 32% of the time.
-- **Durability separates playing time:** Durable players reached 500 PA 79% of the time and fell under 300 PA only 5–9% of the time; Playing-time-risk players reached 500 PA 33–49% of the time.
+- **80% of actual outcomes landed inside the 80% ranges** — 78–81% for every projection tier, 78–82% for every age group, and 78–84% in every full season (2020's 60-game season: 70%). Misses are balanced: for players projected 4+ WAR, 12% finished below the range and 11% above.
+- **Playing-time odds match reality:** players given 75% reached 500 PA 75% of the time; players given 32%, 31% of the time.
+- **Durability separates playing time:** Durable players reached 500 PA 76% of the time and fell under 300 PA only 7% of the time; Average players reached 500 PA 60% of the time; Playing-time-risk players 11%.
+- **Injured-list history (v7):** the odds now use each player's last three seasons of injured-list stints from MLB transaction records (2009 on): days missed, 60-day stints, arm injuries, and whether he ended the season still on the IL. For hitters the gain is real but small (better in 9 of 11 test seasons). IL history did **not** improve WAR forecasts, so it's used for playing time only.
 - **What it can't do:** durability does *not* predict who underperforms their WAR forecast. Among players with similar projections, Durable and Playing-time-risk players lost 2+ WAR at about the same rate — performance swings are mostly noise. So PRS+ reports a range for performance and odds for playing time, and makes no "volatile vs. steady" performance call the data doesn't support.
 
 ### Version history
@@ -81,6 +84,7 @@ Two players can share the same projection with very different risk. Every PRS+ f
 - **v5 (PRS+)** re-tuned everything on 2006–2015, added overall batting value, switched to the PRS+ index, and was tested on 11 unseen seasons against Marcel.
 - **v6** added 80% WAR ranges, playing-time odds, and durability labels, validated on 2016–2026.
 - **PRS-P+** extended the method to pitchers, validated the same way against Marcel, with its own 80% ranges and workload odds.
+- **v7 / PRS-P+ v2** blend projected WAR with Marcel (65/35 for hitters, 90/10 for pitchers), add injured-list history to the playing-time and workload odds, and fix ranges that ran too narrow for the top projections. The top tiers are now sized from the most recent five seasons, pooled across ages, because each age group alone had too few stars.
 
 ## Sample Output — PRS+, 2026
 
@@ -88,12 +92,12 @@ Two players can share the same projection with very different risk. Every PRS+ f
 
 ```
 rank  name                 age   PRS+   proj. WAR   80% range    500+ PA   durability
-1     Bobby Witt Jr.        26    367      7.1      3.6 – 9.7      83%     Durable
-2     Pete Crow-Armstrong   24    327      6.4      2.7 – 8.8      83%     Durable
-3     Juan Soto             27    296      5.8      2.2 – 7.9      78%     Durable
-4     Elly De La Cruz       24    295      5.7      2.1 – 8.0      83%     Durable
-5     JJ Wetherholt         23    285      5.6      2.1 – 7.8      82%     Durable
-17    Aaron Judge           34    220      4.3      2.0 – 5.8      34%     Playing-time risk
+1     Bobby Witt Jr.        26    367      6.6      4.2 – 9.6      85%     Durable
+2     Pete Crow-Armstrong   24    327      6.1      3.3 – 9.0      85%     Durable
+3     Juan Soto             27    296      5.0      2.4 – 7.2      78%     Durable
+4     Elly De La Cruz       24    295      5.2      2.4 – 7.9      84%     Durable
+5     JJ Wetherholt         23    284      4.6      1.9 – 7.1      83%     Durable
+17    Aaron Judge           34    220      4.2      1.8 – 5.8      39%     Playing-time risk
 ```
 
 ### Does PRS+ predict next season? 2025 forecasts vs. actual
@@ -140,6 +144,7 @@ His FIP got worse (home runs doubled, 11 → 20) — a real decline. His ERA got
 - PRS-P+ beats Marcel for **both starters (r 0.60 vs 0.58) and relievers (0.44 vs 0.38)** — relievers are harder to project for everyone, but that's where PRS-P+ gains the most.
 - **Little age bias:** Marcel underrates pitchers 25 and under (+0.17 WAR) and overrates those 35+ (−0.18); PRS-P+ stays within ±0.05 at every age.
 - The edge over Marcel is smaller for pitchers than for hitters — pitcher WAR is noisier year to year — but it is consistent: a smaller average miss in all 11 test seasons.
+- **Blended projection (v2):** projected WAR is **90% PRS-P + 10% Marcel**. It beat PRS-P alone in all 11 test seasons, though by a small margin (r 0.633 → 0.635). The PRS-P+ index itself is unchanged.
 
 ![PRS-P+ 2026 top 10](PRS_P_Rankings_2026.png)
 
@@ -155,16 +160,17 @@ Like the hitter version, every PRS-P+ forecast comes with:
 ![PRS-P+ risk validation](PRS_P_Risk_Validation.png)
 
 Tested on 2016–2026, with each season built only from earlier seasons:
-- **79.6% of outcomes landed inside the 80% ranges** — starters 79%, relievers 80%, 78–80% for most ages. Two honest gaps: the small group of aces projected 2.5+ WAR came in at 76%, and pitchers 35+ at 86% (ranges slightly wide).
-- **Workload odds match reality** for both roles — relievers given 48% reached 50 IP 49% of the time; starters given 33% reached 150 IP 35% of the time. Starter innings have been falling for years, so the odds are recalibrated each season on the most recent three, separately for starters and relievers.
-- **Durability separates workload:** Durable starters reached 150 IP 61% of the time (median 172 IP the next season) vs. 27% for Workload-risk starters (median 103 IP).
+- **79% of outcomes landed inside the 80% ranges** — starters 78%, relievers 79%, 77–79% for most ages. Aces projected 2.5+ WAR now land inside 79% of the time (76% before v2), with misses split evenly above and below. One honest gap remains: pitchers 35+ come in at 86% (ranges slightly wide).
+- **Workload odds match reality** for both roles — relievers given 48% reached 50 IP 49% of the time; starters given 32% reached 150 IP 35% of the time. Starter innings have been falling for years, so the odds are recalibrated each season on the most recent three, separately for starters and relievers. Honest gap: the few starters given 70%+ odds (about 5 a season) reached 150 IP only about 60–65% of the time — starter workloads have a hard ceiling no model fully captures.
+- **Injured-list history (v2)** helps more for pitchers than hitters: workload odds improved in 8 of 11 test seasons. Ending a season on the IL and arm injuries lower the odds most.
+- **Durability separates workload:** Durable starters reached 150 IP 61% of the time vs. 18% for Workload-risk starters; Durable relievers reached 50 IP 65% of the time vs. 16%.
 - As with hitters, durability predicts **innings, not performance** — it doesn't tell you who will underperform their WAR forecast.
 
 ### Runs-allowed range
 
-Because ERA-based results swing more than FIP-based ones, each pitcher also gets an **80% range for runs-allowed WAR** (RA9-WAR — WAR built from the runs that actually scored). It's centered on the same projection, sized and tested the same way, and it's about 28% wider than the FIP-based range. In the 2026 top 20 chart above it's the thin line under each bar.
+Because ERA-based results swing more than FIP-based ones, each pitcher also gets an **80% range for runs-allowed WAR** (RA9-WAR — WAR built from the runs that actually scored). It's centered on a runs-allowed projection (same blend, converted to runs-allowed WAR) and sized and tested the same way, and it's about 30% wider than the FIP-based range. In the 2026 top 20 chart above it's the thin line under each bar.
 
-- **2016–2026 test:** 78.7% of runs-allowed outcomes landed inside (starters 78%, relievers 79%). The small group of aces projected 2.5+ WAR came in narrow at 74%.
+- **2016–2026 test:** 78.9% of runs-allowed outcomes landed inside (starters 79%, relievers 79%). Aces projected 2.5+ WAR: 78% (74% before v2).
 - **Judged on runs allowed,** PRS-P+ still edges Marcel over the 11 test seasons (r 0.553 vs. 0.545), though the margin is thin.
 
 ### 2026 report card
