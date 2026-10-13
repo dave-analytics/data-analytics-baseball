@@ -6,7 +6,7 @@ Public sports analytics portfolio: PRS+ (README and charts only; code kept priva
 
 ## Last change
 
-2026-10-09 — Graded preseason 2026 PRS-P against the 2026 season; found the FIP-based vs runs-allowed WAR gap (Skenes: 4.2 vs 3.0). Labeled PRS-P as FIP-based everywhere and added a validated 80% runs-allowed WAR range (78.7% coverage 2016–26). PRS README: "Which WAR?" note, runs-allowed range, 2026 report card; charts relabeled. Dashboard updated with both ranges.
+2026-10-09 — Graded preseason 2026 PRS-P against the 2026 season; found the FIP-based vs runs-allowed WAR gap (Skenes: 4.2 vs 3.0). Labeled PRS-P as FIP-based everywhere and added a validated 80% runs-allowed WAR range (78.7% coverage 2016–26). PRS README: "Which WAR?" note, "What is FIP?" explainer, runs-allowed range, 2026 report card; charts relabeled. Dashboard updated with both ranges and a FIP explainer.
 
 ## Next step
 

@@ -105,6 +105,21 @@ The same idea for pitchers: **how good he is × how many innings he delivers**, 
 
 > **Which WAR?** PRS-P+ projects **FIP-based WAR** (the MLB Stats API's pitching WAR), which credits strikeouts, walks, and home runs — the outcomes a pitcher controls — and mostly ignores runs that score on balls in play. It's the standard target for pitcher projections because it's steadier year to year. It is **not** the same as ERA. Paul Skenes in 2026 posted 4.2 FIP-based WAR (12th among pitchers) but only 3.0 runs-allowed WAR (33rd) after his ERA rose from 1.97 to 3.82. That's why every pitcher also gets a separate range for runs-allowed WAR (below).
 
+#### What is FIP?
+
+**FIP (Fielding Independent Pitching)** estimates what a pitcher's ERA *should* have been, using only the outcomes he controls without help from his fielders: **strikeouts** (good), **walks and hit batters** (bad), and **home runs** (very bad).
+
+> FIP = (13 × HR + 3 × (BB + HBP) − 2 × K) ÷ innings pitched + a constant (~3.1)
+
+The constant puts FIP on the same scale as ERA, so a 3.50 FIP reads like a 3.50 ERA. Balls in play are left out because what happens to them depends heavily on the defense, the ballpark, and luck — those swing a lot from year to year, so FIP predicts next season better than ERA does.
+
+| Paul Skenes | ERA | FIP |
+|---|---|---|
+| 2025 | 1.97 | 2.36 |
+| 2026 | 3.82 | 3.33 |
+
+His FIP got worse (home runs doubled, 11 → 20) — a real decline. His ERA got worse by more than FIP explains, partly from balls in play and run timing. FIP-based WAR turns FIP into wins; runs-allowed WAR uses the runs that actually scored, so it tracks ERA.
+
 - **Pitcher quality** — strikeout rate, walk rate, and overall pitching value per batter faced over the last two seasons (pitchers change fast, so the most recent season counts three times as much and older seasons don't help), plus translated minor-league strikeout rates for young arms and an age curve.
 - **Availability** — innings over the last two seasons, skipping pre-debut seasons, with a role bonus for starters (who pile up innings).
 
