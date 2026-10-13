@@ -6,11 +6,11 @@ Public sports analytics portfolio: PRS+ (README and charts only; code kept priva
 
 ## Last change
 
-2026-10-08 — PRS-P+ (pitchers): 21-season backtest vs Marcel (beats Marcel 10 of 11 unseen seasons, smaller average miss 11 of 11), then pitcher risk: 80% WAR ranges (79.6% coverage on 2016–26) and role-specific workload odds (150+ IP SP / 50+ IP RP) with durability labels. PRS README + 4 pitcher charts. (Earlier today: PR #1 merged.)
+2026-10-09 — Graded preseason 2026 PRS-P against the 2026 season; found the FIP-based vs runs-allowed WAR gap (Skenes: 4.2 vs 3.0). Labeled PRS-P as FIP-based everywhere and added a validated 80% runs-allowed WAR range (78.7% coverage 2016–26). PRS README: "Which WAR?" note, "What is FIP?" explainer, runs-allowed range, 2026 report card; charts relabeled. Dashboard updated with both ranges and a FIP explainer.
 
 ## Next step
 
-After the 2026 postseason ends: rerun `prs_v6.py` and `prs_p.py` with final 2026 data and publish 2027 preseason PRS+ and PRS-P+ rankings (with risk ranges) as a dated GitHub release, to be graded after the 2027 season. Nothing to do until then.
+After the 2026 postseason ends: rerun `prs_v6.py` and `prs_p.py` with final 2026 data and publish 2027 preseason PRS+ and PRS-P+ rankings (with risk ranges) as a dated GitHub release, to be graded after the 2027 season, and refresh the dashboard's data files with the final numbers. Nothing to do until then.
 
 ## Blockers
 
