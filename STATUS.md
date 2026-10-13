@@ -2,16 +2,16 @@
 
 ## Current state
 
-Public sports analytics portfolio: PRS+ (README and charts only; code kept private), Infield Weekly Report (overhauled, verified on live data), Yahoo pitcher tracker, learning files. PRS+ (v6) is an index (100 = average regular) backtested over 21 seasons — beats Marcel in 9 of 11 unseen seasons — with validated 80% WAR ranges and playing-time odds. PRS-P+ (pitchers) beats Marcel in 10 of 11 unseen seasons, also with validated ranges and workload odds. PR #1 (infield report overhaul + PRS+ docs/charts) merged to main 2026-10-07.
+Public sports analytics portfolio: PRS+ (README and charts only; code kept private), Infield Weekly Report, Yahoo pitcher tracker, learning files. PRS+ v7 (hitters) and PRS-P+ v2 (pitchers) are backtested over 21 seasons against Marcel. Projected WAR now blends PRS with Marcel. Playing-time and workload odds use injured-list history. The 80% ranges are recalibrated: 80% coverage for hitters, 79% for pitchers, and 79% for pitcher aces.
 
 ## Last change
 
-2026-10-09 — Graded preseason 2026 PRS-P against the 2026 season; found the FIP-based vs runs-allowed WAR gap (Skenes: 4.2 vs 3.0). Labeled PRS-P as FIP-based everywhere and added a validated 80% runs-allowed WAR range (78.7% coverage 2016–26). PRS README: "Which WAR?" note, "What is FIP?" explainer, runs-allowed range, 2026 report card; charts relabeled. Dashboard updated with both ranges and a FIP explainer.
+2026-10-13 — Built PRS v7 and PRS-P v2 (private scripts sent to Dave, not in the repo). Changes: Marcel blend (65/35 for hitters, 90/10 for pitchers); IL-history features for odds only, since they didn't help WAR forecasts; top-tier ranges pooled across ages using the last 5 seasons. Reran the 2026 rankings, refreshed 6 charts, and updated PRS_README (blend, IL history, new coverage numbers, honest gaps, version history). Dashboard now runs on the v7/v2 data.
 
 ## Next step
 
-After the 2026 postseason ends: rerun `prs_v6.py` and `prs_p.py` with final 2026 data and publish 2027 preseason PRS+ and PRS-P+ rankings (with risk ranges) as a dated GitHub release, to be graded after the 2027 season, and refresh the dashboard's data files with the final numbers. Nothing to do until then.
+After the 2026 postseason, rerun `prs_v7.py` and `prs_p2.py` with final data and publish 2027 preseason rankings as a dated GitHub release.
 
 ## Blockers
 
-Waiting for the 2026 postseason to finish before posting preseason rankings (Dave's call).
+Preseason rankings are waiting for the postseason to end (Dave's call).
